@@ -17,26 +17,21 @@ gamma_rate = most_common.dot(binary_convertor)
 data = data.astype(int)
 n, width = np.shape(data)
 
-gamma_rate = (data.sum(axis=0)/n > 0.5)
+gamma_rate = (data.sum(axis=0)/n > 0.5) # use mean instead !!
 gamma_res = int("".join(map(str, gamma_rate.astype(int))), 2)
 
 epsilon_rate = ~gamma_rate
 epsilon_res = int("".join(map(str, epsilon_rate.astype(int))), 2)
 
 print("Gamma rate: ", bin(gamma_res), 
-      " Epsilon rate: ", bin(epsilon_res),
-      "Results: ", gamma_res * epsilon_res
+      "\nEpsilon rate: ", bin(epsilon_res),
+      "\nResults: ", gamma_res * epsilon_res
 )
 
 # ---------- SECOND PB --------------
-def get_occurence_ox(array, i):
-    n = len(array)
-    return (array.sum(axis=0)/n)[i] >= 0.5
-
-# type ox = true
-# type c02 = false
-def get_new_array(array, i, type):
-    bin_condition = ~ (get_occurence_ox(array, i) ^ type) # not xor 
+# type ox = true, c02 = false
+def get_new_array(array, i, bool: type):
+    bin_condition = ~ (array.mean(axis=0)[i] >= 0.5 ^ type) # not xor to get the condition directly from type
     c, = np.where(array[:,i] == bin_condition)
     return array[c]
 
@@ -52,6 +47,6 @@ r_ox = int("".join(map(str, r_ox)), 2)
 r_co2 = int("".join(map(str, r_co2)), 2)
 
 print("Ox rate: ", bin(r_ox), 
-      " CO2 rate: ", bin(r_co2),
-      "Results: ", r_ox * r_co2
+      "\nCO2 rate: ", bin(r_co2),
+      "\nResults: ", r_ox * r_co2
 )
