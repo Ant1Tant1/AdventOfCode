@@ -30,8 +30,8 @@ print("Gamma rate: ", bin(gamma_res),
 
 # ---------- SECOND PB --------------
 # type ox = true, c02 = false
-def get_new_array(array, i, bool: type):
-    bin_condition = ~ (array.mean(axis=0)[i] >= 0.5 ^ type) # not xor to get the condition directly from type
+def get_new_array(array, i, type):
+    bin_condition = ~ ((array.mean(axis=0)[i] >= 0.5) ^ type) # not xor to get the condition directly from type
     c, = np.where(array[:,i] == bin_condition)
     return array[c]
 
