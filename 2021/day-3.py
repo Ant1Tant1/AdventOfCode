@@ -36,10 +36,8 @@ def get_occurence_ox(array, i):
 # type ox = true
 # type c02 = false
 def get_new_array(array, i, type):
-    #print(array)
-    bin_condition = ~ (get_occurence_ox(array, i) ^ type)
+    bin_condition = ~ (get_occurence_ox(array, i) ^ type) # not xor 
     c, = np.where(array[:,i] == bin_condition)
-    #print(c)
     return array[c]
 
 def recursive(array, type, i = 0):
