@@ -5,7 +5,15 @@ import numpy as np
 data = readfile(r"2021/day-3.txt", my_type=str)
 
 # -------- FIRST PB -------------------
-data = np.array([list(string) for string in data])
+data = np.array([list(string) for string in data], dtype=np.int16)
+
+# ===================================================
+# This is HUGO's method with dot -> similar but nicer for conversion
+binary_convertor = np.array([2**(i-1) for i in range(data.shape[1], 0, -1)])
+most_common = (np.mean(data, axis=0) > 0.5) * 1
+gamma_rate = most_common.dot(binary_convertor)
+# ==================================================
+
 data = data.astype(int)
 n, width = np.shape(data)
 
