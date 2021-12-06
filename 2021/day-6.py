@@ -13,6 +13,26 @@ data = np.array(array, dtype=int)
 data.sort()
 c = collections.Counter(data)
 
+# =======  ADRIEN'S WAY OF SOLVING IT  =======
+# ============  MUCH MORE BETTER  ============
+
+fishDict = {i: 0 or c[i] for i in range(9)}
+
+def next(d):
+    d[7] += d[0]
+    d[9] = d[0]
+    return {i: d[i+1] for i in range(9)}
+
+pb1 = fishDict.copy()
+for _ in range(80):
+    pb1 = next(pb1)
+print(sum(pb1.values()))
+
+pb2 = fishDict.copy()
+for _ in range(256):
+    pb2 = next(pb2)
+print(sum(pb2.values()))
+
 
 # ---------------- FIRST PB ----------------------
 # Get fishes for a given timer
@@ -77,4 +97,3 @@ def recursive(col, counter, multiplier):
 # resolve the pb
 recursive(c, counter, multiplier)
 print(res)
-
