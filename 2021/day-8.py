@@ -28,6 +28,7 @@ class Data:
         self.entries = np.asarray(sorted(self.entries, key=len))
         self.results = np.asarray(line.split(' | ')[1].split(" "))
         self.letter_dict = {}
+        
         # a is the diff between nb 1 & 7 which are entries 0 & 1 
         self.letter_dict['a'] = (set(self.entries[0]) ^ set(self.entries[1])).pop() # difference
 
@@ -79,16 +80,3 @@ data = readfile(r"2021/day-8.txt", my_type=str)
 d = np.asarray([Data(dt) for dt in data])
 results = [dt.get_result() for dt in d]
 print(sum(results))
-
-
-import itertools
-
-RAW = "abcefg cf acdeg acdfg bcdf abdfg abdefg acf abcdefg abcdfg"
-DIG = {frozenset(k): str(i) for i, k in enumerate(RAW.split())}
-
-for perm in itertools.permutations("abcdefg"):
-    print(perm)
-    continue
-    mapping = dict(zip(perm, "abcdefg"))
-    if all(frozenset(map(mapping.get, s)) in DIG for s in l1):
-        r2 += int("".join(DIG[frozenset(map(mapping.get, k))] for k in l2))  # type: ignore
