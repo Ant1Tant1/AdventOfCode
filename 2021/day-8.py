@@ -19,6 +19,7 @@ print(np.sum(r), "are part of the digits", easy_comb_dict.keys())
 
 
 # ===========  PB 2  ===========
+# could have been solved a better way .. 
 array = np.asarray([1, 7, 4, 2,3,5, 0,6,9, 8])
 dict_result = {"abcefg": 0, 'cf': 1, "acdeg": 2, "acdfg": 3, "bcdf": 4, "abdfg": 5, "abdefg": 6, "acf": 7, "abcdefg": 8, "abcdfg": 9}
 class Data:
@@ -30,20 +31,20 @@ class Data:
         # a is the diff between nb 1 & 7 which are entries 0 & 1 
         self.letter_dict['a'] = (set(self.entries[0]) ^ set(self.entries[1])).pop() # difference
 
-        # g is the diff between 4 + a & 9 
+        # g is the diff between 4a & 9 
         self.letter_dict['g'] = sorted(
             [set(self.letter_dict['a'] + self.entries[2]) ^ set(s) for s in self.entries[6:9]], 
             key=len
         )[0].pop()
 
-        # d is the diff between 1 + a + g & 3
+        # d is the diff between 1ag & 3
         self.letter_dict['d'] = sorted(
             [set(self.letter_dict['a'] + self.letter_dict['g'] + self.entries[0]) 
             ^ set(s) for s in self.entries[3:6]],
             key=len
         )[0].pop()
 
-        # b is the diff between 1 + d & 4
+        # b is the diff between 1d & 4
         self.letter_dict['b'] = (set(self.entries[0] + self.letter_dict['d']) ^ set(self.entries[2])).pop()
 
         # f is the diff between abdg & 5
@@ -78,3 +79,16 @@ data = readfile(r"2021/day-8.txt", my_type=str)
 d = np.asarray([Data(dt) for dt in data])
 results = [dt.get_result() for dt in d]
 print(sum(results))
+
+
+import itertools
+
+RAW = "abcefg cf acdeg acdfg bcdf abdfg abdefg acf abcdefg abcdfg"
+DIG = {frozenset(k): str(i) for i, k in enumerate(RAW.split())}
+
+for perm in itertools.permutations("abcdefg"):
+    print(perm)
+    continue
+    mapping = dict(zip(perm, "abcdefg"))
+    if all(frozenset(map(mapping.get, s)) in DIG for s in l1):
+        r2 += int("".join(DIG[frozenset(map(mapping.get, k))] for k in l2))  # type: ignore
