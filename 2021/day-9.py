@@ -15,14 +15,23 @@ data = readfile(r"2021/day-9.txt", my_type=str)
 data = np.array([list(string) for string in data], dtype=int)
 
 # ===========  PB 1  ===========
-def everything_unless_borders(ax):
+def everything_unless_borders(data, ax):
     return (data - np.roll(data, 1, axis=ax) < 0) \
             & (data - np.roll(data, -1, axis=ax) < 0)
 
 n, m = data.shape
 
+# ############ BEST SOLUTION ############
+# adds a new outline of constant values around the matrix
+data_pad = np.pad(data, 1, "constant", constant_values=9)
+# then the computation can be done without wondering for the border effect
+cond = everything_unless_borders(data_pad, 1) & everything_unless_borders(data_pad, 0)
+print(sum(data[cond[1:-1, 1:-1]]+1))
+# #######################################
+
+
 # Handle general case
-c = everything_unless_borders(1) & everything_unless_borders(0)
+c = everything_unless_borders(data, 1) & everything_unless_borders(data, 0)
 
 # handle borders
 # first line
@@ -57,7 +66,6 @@ def get_data(i, j, visited_places):
 
 
 row_ind, col_ind = np.where(c)
-
 
 res = []
 for i, j in zip(row_ind, col_ind):
