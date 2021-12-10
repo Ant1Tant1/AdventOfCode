@@ -39,7 +39,7 @@ c[0, m-1] = (data[0,m-1] < data[0,m-2]) & (data[0,m-1] < data[1,m-1])
 print(sum(data[c]+1))
 
 
-# ===========  PB 1  ===========
+# ===========  PB 2  ===========
 WALL = 9
 def get_data(i, j, visited_places):
     val = 1
