@@ -1,3 +1,4 @@
+from os import error
 from utils import readfile
 import numpy as np
 
@@ -5,7 +6,7 @@ import numpy as np
 data = readfile(r"2021/day-16.txt", my_type=str)
 data = data[0]
 
-# data = "9C0141080250320F1802104A08"
+# data = "26014c875864c464dc64cc643070"
 
 # put data to binary
 dt = "".join([bin(int(l, 16))[2:].zfill(4) for l in data])
@@ -105,7 +106,7 @@ def get_packet(array):
     elif type_id == 0:
         print("### SUM")
         array, vals = other_packet(array)
-        val = np.sum(vals)
+        val = np.sum(vals, dtype=float)
         print("## SUM is:", val, vals)
 
 
@@ -113,7 +114,7 @@ def get_packet(array):
     elif type_id == 1:
         print("### PROD")
         array, vals = other_packet(array)
-        val = np.prod(vals)
+        val = np.product(vals, dtype=float)
         print("## PROD is:", val, vals)
 
     # min of sub values
