@@ -1,4 +1,3 @@
-from os import error
 from utils import readfile
 import numpy as np
 
