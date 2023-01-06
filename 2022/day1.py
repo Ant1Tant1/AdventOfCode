@@ -2,7 +2,7 @@ from utils import readfile
 import numpy as np
 
 # read data
-data = readfile(r"day1.txt")
+data = readfile(r"2022/day1.txt")
 
 res = []
 r= 0

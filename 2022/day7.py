@@ -2,5 +2,5 @@ from utils import readfile
 import numpy as np
 
 # read data
-data = readfile(r"day6.txt")
+data = readfile(r"2022/day7.txt")
 

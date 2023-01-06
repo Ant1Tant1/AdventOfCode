@@ -2,7 +2,7 @@ from utils import readfile
 import numpy as np
 
 # read data
-data = readfile(r"day5.txt")
+data = readfile(r"2022/day5.txt")
 
 def create_stack():
     idx = -1
