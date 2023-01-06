@@ -7,8 +7,7 @@ data = data[0]
 
 
 for i in range(len(data)-4):
-    buffer = data[i:i+4]
-    if len(set(buffer)) == 4:
+    if len(set(data[i:i+4])) == 4:
         break
 
 print("first pb: ", i + 4)
