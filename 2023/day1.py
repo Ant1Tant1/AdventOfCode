@@ -14,7 +14,11 @@ for i, line in enumerate(data):
     nb = regex.findall(line)
     results[i] = int("".join([nb[0], nb[-1]]))
 
-print(results.sum())
+# other option - more elegant but longer
+digits = [''.join(re.findall(r'\d+', i)) for i in data]
+lasttwo_digits = [int(f'{d[0]}{d[-1]}') for d in digits]
+
+print(results.sum(), sum(lasttwo_digits))
 
 
 # problem 2
@@ -60,10 +64,8 @@ for i, line in enumerate(data):
 
     if results[i] > 100:
         results[i] = results[i]//100*10 + results[i]%10
-        print(line)
-        print(nb)
-        print(results[i])
-
-
+        # print(line)
+        # print(nb)
+        # print(results[i])
 
 print(results.sum())

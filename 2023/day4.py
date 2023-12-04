@@ -25,9 +25,6 @@ print("Problem 1: ", res)
 cards = np.ones(len(data))
 for i, line in enumerate(data):
     lenght = get_len_of_matching_numbers(line)
-
-    while lenght != 0:
-        cards[i+lenght] += cards[i]
-        lenght-=1
+    cards[i+1:i+lenght+1] += cards[i]
 
 print("Problem 2: ", cards.sum())
