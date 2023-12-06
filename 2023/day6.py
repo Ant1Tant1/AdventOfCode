@@ -6,28 +6,10 @@ import re
 data = readfile(r"2023/day6.txt")
 regex = re.compile('[0-9]+')
 
-inputs = np.array([
+time, dist = np.array([
     [int(i) for i in regex.findall(line)]
     for line in data
 ])
-time = inputs[0]
-dist = inputs[1]
-
-# max_ = np.max(inputs[0])
-# race_nb = inputs.shape[1]
-# res = np.zeros(race_nb)
-# ms = 0
-# while ms <= max_:
-#     for i in range(race_nb):
-#         if ms > inputs[0][i]:
-#             continue
-
-#         if ms * (inputs[0][i] - ms) > inputs[1][i]:
-#             res[i] += 1
-
-#     ms +=1
-
-# print("Problem 1: ", res.prod())
 
 def equation(time, distance):
     delta = time**2 - 4*distance
