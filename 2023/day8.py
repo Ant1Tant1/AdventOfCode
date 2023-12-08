@@ -55,21 +55,4 @@ def get_result(array):
         return get_result(np.concatenate([[get_result(array[:2])], array[2:]]))
 
 
-
-
-
-
-
-
-
-
-while sum([1 if key[2] == 'Z' else 0 for key in keys ]) != max_:
-    dir = 0 if direction[counter%len(direction)] == 'L' else 1
-    keys = [
-        d[key][dir]
-        for key in keys
-    ]
-    counter += 1
-    # print(keys)
-
-print("Problem 2: ", counter)
+print("Problem 2: ", get_result(res))
